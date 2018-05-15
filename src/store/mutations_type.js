@@ -1,0 +1,1 @@
+export const TOGGLE_OPENED = 'TOGGLE_OPENED';
