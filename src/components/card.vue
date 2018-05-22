@@ -6,25 +6,24 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "Card",
   props: {
     card: Object
   },
   computed: {
-    ...mapGetters({ image_root: "getImageRoot" }),
-
+    
     img: function() {
       let img;
       this.card.opened
-        ? (img = this.image_root + this.card.imgName)
-        : (img = this.image_root + "641");
+        ? (img = require(`@/assets/img/${this.card.imgName}.jpg`))
+        : (img = require(`@/assets/img/1.jpg`));
       return img;
     }
   },
   methods: {
-    ...mapActions({handleCardClick:'handleCardClick'})
+    ...mapActions({ handleCardClick: "handleCardClick" })
   }
 };
 </script>

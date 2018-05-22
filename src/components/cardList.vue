@@ -18,14 +18,11 @@ export default {
   data() {
     return {
       cards: null,
-      msg: null
     };
   },
   mounted() {
     var list = this.$store.getters.getCardsList;
     this.cards = this.random(list);
-
-    this.msg = "Start!";
   },
   methods: {
     random: function(array) {
@@ -47,23 +44,24 @@ export default {
       return array;
     },
     memoryTime: function() {
+      var time = 5;
       this.openAllCards();
-      this.msg = 5;
+      this.updateMsg(time);
 
       setTimeout(() => {
         this.closeAllCards();
         clearInterval(clock);
-        this.msg = 'Your Turn'
+        this.updateMsg("Your Turn");
       }, 5000);
 
       var clock = setInterval(() => {
-        this.msg--;
+        this.updateMsg(time--);
       }, 1000);
     },
-    ...mapActions(["openAllCards", "closeAllCards"])
+    ...mapActions(["openAllCards", "closeAllCards","updateMsg"])
   },
   computed: {
-    ...mapGetters({ right_set: "getRightSet" })
+    ...mapGetters({ right_set: "getRightSet", msg: "getMsg" })
   },
   watch: {
     right_set: function(value) {

@@ -4,3 +4,4 @@ export const COMPARE = 'COMPARE';
 export const CLEAR_COMPARE_ZONE = 'CLEAR_COMPARE_ZONE';
 export const OPEN_ALL_CARDS = 'OPEN_ALL_CARDS';
 export const CLOSED_ALL_CARDS = 'CLOSED_ALL_CARDS';
+export const UPDATE_MSG = 'UPDATE_MSG';

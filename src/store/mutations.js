@@ -2,76 +2,98 @@ import * as types from './mutations_type.js'
 
 // state
 export const state = {
-    image_root: 'https://picsum.photos/200/200?image=',
     cards: [
         {
             id: 1,
-            imgName: '1084',
+            imgName: '7',
             opened: false
         }, {
             id: 2,
-            imgName: '1084',
+            imgName: '7',
             opened: false
         }, {
             id: 3,
-            imgName: '345',
+            imgName: '9',
             opened: false
         }, {
             id: 4,
-            imgName: '345',
+            imgName: '9',
             opened: false
         }, {
             id: 5,
-            imgName: '579',
+            imgName: '10',
             opened: false
         }, {
             id: 6,
-            imgName: '579',
+            imgName: '10',
             opened: false
         }, {
             id: 7,
-            imgName: '991',
+            imgName: '11',
             opened: false
         }, {
             id: 8,
-            imgName: '991',
+            imgName: '11',
             opened: false
         }, {
             id: 9,
-            imgName: '995',
+            imgName: '12',
             opened: false
         }, {
             id: 10,
-            imgName: '995',
+            imgName: '12',
             opened: false
         }, {
             id: 11,
-            imgName: '95',
+            imgName: '8',
             opened: false
         }, {
             id: 12,
-            imgName: '46',
+            imgName: '2',
             opened: false
         }, {
             id: 13,
-            imgName: '68',
+            imgName: '3',
             opened: false
         }, {
             id: 14,
-            imgName: '1083',
+            imgName: '4',
             opened: false
         }, {
             id: 15,
-            imgName: '1023',
+            imgName: '5',
             opened: false
         }, {
             id: 16,
-            imgName: '987',
+            imgName: '6',
             opened: false
         }
     ],
     compare_zone: [],
-    right_set: 0
+    right_set: 0,
+    mapCardQuestion:[
+        {
+            imgName: '7',
+            question: '1'
+        },
+        {
+            imgName: '9',
+            question: '3'
+        },
+        {
+            imgName: '10',
+            question: '5'
+        },
+        {
+            imgName: '11',
+            question: '2'
+        },
+        {
+            imgName: '12',
+            question: '4'
+        },
+    ],
+    msg:'Start!'
 }
 
 // mutations
@@ -110,6 +132,8 @@ export const mutations = {
                 });
         }else{
             state.right_set++;
+            var qObj = state.mapCardQuestion.find(item =>item.imgName == a);
+            state.msg = `Bingo! Please answer Q${qObj.question}`
         }
     },
     [types.CLEAR_COMPARE_ZONE](state) {
@@ -128,6 +152,9 @@ export const mutations = {
             .forEach((item) => {
                 item.opened = false
             })
+    },
+    [types.UPDATE_MSG](state,msg) {
+        state.msg = msg
     },
 
 }

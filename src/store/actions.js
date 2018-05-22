@@ -6,6 +6,7 @@ export const handleCardClick = ({
     state
 }, card_id) => {
 
+    commit(types.UPDATE_MSG,'Your Turn')
     // if card is already opend...
     let card = state
         .cards
@@ -19,7 +20,7 @@ export const handleCardClick = ({
                 setTimeout(function () {
                     commit(types.COMPARE);
                     commit(types.CLEAR_COMPARE_ZONE);
-                }, 2000);
+                }, 1000);
             }
     }
 }
@@ -30,4 +31,8 @@ export const openAllCards = ({commit}) =>{
 
 export const closeAllCards = ({commit}) =>{
     commit(types.CLOSED_ALL_CARDS);
+}
+
+export const updateMsg = ({commit},msg) =>{
+    commit(types.UPDATE_MSG,msg);
 }
