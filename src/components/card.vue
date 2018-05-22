@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="toggleCard(card.id)"
+  <div class="card" @click="handleCardClick(card.id)"
   v-bind:style="{ backgroundImage: 'url('+ img +')' }">
   
   </div>
@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ toggleCard: "ToggleOpened" })
+    ...mapActions({handleCardClick:'handleCardClick'})
   }
 };
 </script>

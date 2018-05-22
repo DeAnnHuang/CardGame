@@ -1,11 +1,15 @@
 <template>
  <div class="cardList">
+   <div class="cardsWrap">
     <Card v-for="card in cards" :card="card" :key="card.id"/>
+    </div>
+    <p v-if="msg" @click="memoryTime">{{msg}}</p>
  </div>
 </template>
 
 <script>
 import Card from "./card";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "cardList",
   components: {
@@ -13,12 +17,15 @@ export default {
   },
   data() {
     return {
-      cards: null
+      cards: null,
+      msg: null
     };
   },
   mounted() {
     var list = this.$store.getters.getCardsList;
     this.cards = this.random(list);
+
+    this.msg = "Start!";
   },
   methods: {
     random: function(array) {
@@ -39,13 +46,49 @@ export default {
       }
       return array;
     },
+    memoryTime: function() {
+      this.openAllCards();
+      this.msg = 5;
+
+      setTimeout(() => {
+        this.closeAllCards();
+        clearInterval(clock);
+        this.msg = 'Your Turn'
+      }, 5000);
+
+      var clock = setInterval(() => {
+        this.msg--;
+      }, 1000);
+    },
+    ...mapActions(["openAllCards", "closeAllCards"])
+  },
+  computed: {
+    ...mapGetters({ right_set: "getRightSet" })
+  },
+  watch: {
+    right_set: function(value) {
+      if (value == 5) {
+        this.openAllCards();
+        alert("mission accomplish!");
+      }
+    }
   }
 };
 </script>
 
 <style lang="sass" scope>
 @import '../assets/common'
-.cardList
-    @include Flex(center, center)
-    flex-wrap: wrap
+.cardsWrap
+  @include Flex(center, center)
+  flex-wrap: wrap
+  width: 90vw
+  margin: 0 auto
+p
+  font-weight: bold
+  font-size: 20px
+  color: #222
+  border: 5px #222 double
+  padding: 10px 20px
+  display: inline-block
+  cursor: pointer
 </style>

@@ -2,7 +2,7 @@ import * as types from './mutations_type.js'
 
 // state
 export const state = {
-    image_root: 'https://picsum.photos/300/300?image=',
+    image_root: 'https://picsum.photos/200/200?image=',
     cards: [
         {
             id: 1,
@@ -69,16 +69,65 @@ export const state = {
             imgName: '987',
             opened: false
         }
-    ]
+    ],
+    compare_zone: [],
+    right_set: 0
 }
 
 // mutations
 export const mutations = {
-    // action 發出 commit 會對應到 mutation 使用的是 Object key 方式
-    [types.TOGGLE_OPENED](state, card_id) {
-        // 在 mutation 改變 state（只有 mutation 可以改變！）
-        let card = state.cards.find((item)=> item.id == card_id);
-        // console.log(card);
-        card.opened = !card.opened;
+    [types.CARD_OPENED](state, card_id) {
+        let card = state
+            .cards
+            .find((item) => item.id == card_id);
+
+        card.opened = true;
     },
+    [types.ADD_COMPARE_ZONE](state, card_id) {
+        let card = state
+            .cards
+            .find((item) => item.id == card_id);
+
+        state
+            .compare_zone
+            .push(card);
+    },
+    [types.COMPARE](state) {
+        var a = state.compare_zone[0].imgName;
+        var b = state.compare_zone[1].imgName;
+
+        if (a !== b) {
+            state
+                .compare_zone
+                .forEach(element => {
+                    let Id = element.id;
+                    let card = state
+                        .cards
+                        .find((i) => {
+                            return i.id == Id
+                        })
+                    card.opened = false
+                });
+        }else{
+            state.right_set++;
+        }
+    },
+    [types.CLEAR_COMPARE_ZONE](state) {
+        state.compare_zone = [];
+    },
+    [types.OPEN_ALL_CARDS](state) {
+        state
+            .cards
+            .forEach((item) => {
+                item.opened = true
+            })
+    },
+    [types.CLOSED_ALL_CARDS](state) {
+        state
+            .cards
+            .forEach((item) => {
+                item.opened = false
+            })
+    },
+
 }

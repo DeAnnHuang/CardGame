@@ -1,1 +1,6 @@
-export const TOGGLE_OPENED = 'TOGGLE_OPENED';
+export const CARD_OPENED = 'CARD_OPENED';
+export const ADD_COMPARE_ZONE = 'ADD_COMPARE_ZONE';
+export const COMPARE = 'COMPARE';
+export const CLEAR_COMPARE_ZONE = 'CLEAR_COMPARE_ZONE';
+export const OPEN_ALL_CARDS = 'OPEN_ALL_CARDS';
+export const CLOSED_ALL_CARDS = 'CLOSED_ALL_CARDS';
