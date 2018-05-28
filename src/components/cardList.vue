@@ -67,7 +67,7 @@ export default {
     right_set: function(value) {
       if (value == 5) {
         this.openAllCards();
-        alert("mission accomplish!");
+        this.updateMsg("mission accomplish!");
       }
     }
   }
